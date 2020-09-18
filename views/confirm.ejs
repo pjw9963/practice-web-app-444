@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Confirmation Page</title>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+               <div class="card">                   
+                <div class="card-header">
+                  Confirm the information is correct
+                </div>
+                <div class="card-body">
+                  <form method="POST" action="/submit-form">
+                    <div class="form-group">
+                      <label for="input_firstname">First Name</label>
+                      <input type="text" value='<%= fname %>' class="form-control" id="input_firstname" placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                      <label for="input_lastname">Last Name</label>
+                      <input type="text" value='<%= lname %>' class="form-control" id="input_lastname" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                      <label for="input_street">Street Address</label>
+                      <input type="text" value='<%= address %>' class="form-control" id="input_street" placeholder="Enter street address">
+                    </div>
+                    <div class="form-group">
+                      <label for="input_email">Email address</label>
+                      <div id="id_email_alert" class="alert alert-danger" style="display: none;" role="alert">
+                        Invalid email, Please enter a valid email address
+                      </div>
+                      <input type="email" value='<%= email %>' class="form-control" onblur="validateEmail(this);" id="input_email" placeholder="Enter email">                                  
+                    </div>
+                    <div class="form-group">
+                      <label for="input_school_company">School/Company</label>
+                      <input type="text" value='<%= school %>' class="form-control" id="input_school_company" placeholder="Enter school or company name">                                  
+                    </div>
+                    <div class="form-group">
+                      <label for="input_date">Date</label>
+                      <input type="date" value="<%= date %>" class="form-control" id="input_date" placeholder="Enter todays date">                                  
+                    </div>   
+                    <div class="form-group">
+                      <label for="input_status">Status</label>
+                      <select id="sel_status" class="form-control">
+                        <option value="undergraduate student">undergraduate student</option>
+                        <option value="graduate student">graduate student</option>
+                        <option value="professor">professor</option>
+                        <option value="industry">industry</option>
+                        <option value="employee">employee</option>
+                      </select>                                 
+                    </div>     
+                    <div class="form-group">
+                      <label for="input_payment">Payment Method</label>
+                      <select id="sel_payment" class="form-control">
+                        <option value="credit">Credit</option>
+                        <option value="debit">Debit</option>
+                        <option value="paypal">PayPal</option>
+                      </select>                                 
+                    </div>                                                      
+                    <button type="button" onclick="showRegAlert();" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-secondary" onclick="window.history.go(-1)">Back</button>
+                    </form>
+                </div>
+                <div id="id_reg_alert" class="alert alert-success" style="display: none;" role="alert">
+                    Registration Successful :)
+                  </div>
+              </div> 
+            </div>            
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        function showRegAlert() {
+            document.getElementById('id_reg_alert').style.display = 'block';
+        }
+
+        function selectElement(id, valueToSelect) {    
+            let element = document.getElementById(id);
+            element.value = valueToSelect;
+        }
+
+        selectElement('sel_status', '<%= status %>');
+        selectElement('sel_payment', '<%= payment %>');
+
+    </script>
+</body>
+</html>
